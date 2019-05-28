@@ -11,4 +11,6 @@ public interface DiscoverView extends MVPView {
     void createView(List<Restaurant> body);
 
     void updateLocationString(String addressString);
+
+    void itemClicked(Restaurant restaurant);
 }

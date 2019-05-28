@@ -7,6 +7,13 @@
     android:orientation="vertical"
     tools:context=".discover.DiscoverActivity">
 
+    <ProgressBar
+        android:id="@+id/discover_loading_spinner"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/discover_ll_address_click"
         android:layout_width="match_parent"

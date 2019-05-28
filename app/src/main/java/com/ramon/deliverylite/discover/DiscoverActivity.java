@@ -2,6 +2,8 @@ package com.ramon.deliverylite.discover;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ramon.deliverylite.R;
@@ -16,10 +18,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DiscoverActivity extends BaseActivity implements DiscoverView {
+    private static final String RV_BUNDLE_STATE = "RV_BUNDLE_STATE";
     @BindView(R.id.discover_rv_restaur)
     RecyclerView restaurantRV;
     @BindView(R.id.discover_tv_location)
     TextView locationText;
+    @BindView(R.id.discover_loading_spinner)
+    ProgressBar progressBar;
 
     private DiscoverPresenter presenter;
 
@@ -34,17 +39,12 @@ public class DiscoverActivity extends BaseActivity implements DiscoverView {
 
     @Override
     public void showLoadingDialog() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoadingDialog() {
-
-    }
-
-    @Override
-    public void showErrorDialog() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -66,11 +66,29 @@ public class DiscoverActivity extends BaseActivity implements DiscoverView {
 
     @Override
     public void createView(List<Restaurant> body) {
-        restaurantRV.setAdapter(new RestaurantAdapter(body,presenter));
+        restaurantRV.setAdapter(new RestaurantAdapter(body, presenter));
     }
 
     @Override
     public void updateLocationString(String addressString) {
-        locationText.setText(getString(R.string.address_string,addressString));
+        locationText.setText(getString(R.string.address_string, addressString));
+    }
+
+    @Override
+    public void itemClicked(Restaurant restaurant) {
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(RV_BUNDLE_STATE, restaurantRV.getLayoutManager().onSaveInstanceState());
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        restaurantRV = savedInstanceState.getParcelable(RV_BUNDLE_STATE);
     }
 }

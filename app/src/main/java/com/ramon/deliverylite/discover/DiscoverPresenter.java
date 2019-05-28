@@ -23,6 +23,7 @@ public class DiscoverPresenter<V extends MVPView> extends BasePresenter<V> imple
     private final Datastore datastore;
     private final DeliveryClient client;
     private final DiscoverView view;
+    private List<Restaurant> body;
 
     public DiscoverPresenter(DiscoverActivity discoverActivity, DeliveryClient client, Datastore datastore) {
         super(discoverActivity);
@@ -36,17 +37,19 @@ public class DiscoverPresenter<V extends MVPView> extends BasePresenter<V> imple
         if (datastore.getUserProfile() == null) {
             view.launchProfileActivity();
         } else {
-            view.showLoadingDialog();
             UserProfile profile = datastore.getUserProfile();
             view.updateLocationString(profile.getAddressString());
-           Address address= LocationUtils.geocodeAddress(new Geocoder(activity), profile.getAddressString());
-
-            client.fetchRestList(this, address.getLatitude(), address.getLongitude(), null);
+            if (body==null) {
+                view.showLoadingDialog();
+                Address address = LocationUtils.geocodeAddress(new Geocoder(activity), profile.getAddressString());
+                client.fetchRestList(this, address.getLatitude(), address.getLongitude(), null);
+            }
         }
     }
 
     @Override
     public void onListSuccess(List<Restaurant> body) {
+        this.body=body;
         view.hideLoadingDialog();
         view.createView(body);
 
@@ -59,6 +62,6 @@ public class DiscoverPresenter<V extends MVPView> extends BasePresenter<V> imple
     }
 
     public void itemClicked(Restaurant restaurant) {
-
+        view.itemClicked(restaurant);
     }
 }
