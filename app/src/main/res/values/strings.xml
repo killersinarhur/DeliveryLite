@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DeliveryLite</string>
+    <string name="address_string">Searching for %s</string>
+</resources>
