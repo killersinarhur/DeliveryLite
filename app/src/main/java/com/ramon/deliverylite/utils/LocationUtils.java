@@ -16,7 +16,7 @@ public class LocationUtils {
         List<Address> list = null;
         try {
             list = geocoder.getFromLocationName(location, 1);
-        } catch (IOException e) {
+        } catch (Exception e) {
             Timber.e(e);
         }
         if (null != list && !list.isEmpty()) {

@@ -6,14 +6,14 @@ import com.ramon.deliverylite.base.BasePresenter;
 import com.ramon.deliverylite.base.MVPView;
 import com.ramon.deliverylite.persistence.Datastore;
 
-public class ProfilePresenter<V extends MVPView> extends BasePresenter<V> {
+class ProfilePresenter<V extends MVPView> extends BasePresenter<V> {
 
     private Activity activity;
     private ProfileView view;
     private UserProfile userProfile;
     private Datastore datastore;
 
-    public ProfilePresenter(ProfileActivity activity, Datastore datastore, UserProfile userProfile) {
+    ProfilePresenter(ProfileActivity activity, Datastore datastore, UserProfile userProfile) {
         super(activity);
         this.activity = activity;
         this.view = activity;
@@ -21,15 +21,15 @@ public class ProfilePresenter<V extends MVPView> extends BasePresenter<V> {
         this.userProfile = userProfile;
     }
 
-    public void onViewCreated() {
+    void onViewCreated() {
         view.initializeView(userProfile);
     }
 
-    public void saveInstance(String name, String address, String email, String phoneNumber) {
+    void saveInstance(String name, String address, String email, String phoneNumber) {
         persistUserProfile(name, address, email, phoneNumber);
     }
 
-    public void persistUserProfile(String name, String address, String email, String phoneNumber) {
+    void persistUserProfile(String name, String address, String email, String phoneNumber) {
         userProfile.setName(name);
         userProfile.setAddressString(address);
         userProfile.setEmail(email);
