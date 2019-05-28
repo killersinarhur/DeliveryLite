@@ -47,18 +47,18 @@ public class LocationUtils {
             stringBuilder.append(address.getAdminArea());
         }
 
-        if (stringBuilder.length() == 0){
-            for (int i=0;i<= address.getMaxAddressLineIndex();i++){
-                if (stringBuilder.length()>0){
+        if (stringBuilder.length() == 0) {
+            for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
+                if (stringBuilder.length() > 0) {
                     stringBuilder.append(", ");
                 }
                 stringBuilder.append(address.getAddressLine(i));
             }
         }
 
-        strAddress=stringBuilder.toString();
-        if(strAddress.equals("null")) strAddress="";
+        strAddress = stringBuilder.toString();
+        if (strAddress.equals("null")) strAddress = "";
 
-            return strAddress;
+        return strAddress;
     }
 }

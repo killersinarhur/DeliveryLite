@@ -33,7 +33,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
-        presenter = new ProfilePresenter(this,datastore, datastore.getUserProfile() != null ? datastore.getUserProfile() : new UserProfile());
+        presenter = new ProfilePresenter(this, datastore, datastore.getUserProfile() != null ? datastore.getUserProfile() : new UserProfile());
         presenter.onAttach(ProfileActivity.this);
     }
 
@@ -79,7 +79,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
     }
 
     @OnClick(R.id.profile_btn_submit)
-    public void submitProfile(){
+    public void submitProfile() {
         presenter.persistUserProfile(givenName.getText().toString(),
                 givenAddress.getText().toString(),
                 givenEmail.getText().toString(),

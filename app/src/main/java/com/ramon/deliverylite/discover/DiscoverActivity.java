@@ -1,6 +1,5 @@
 package com.ramon.deliverylite.discover;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -119,12 +118,12 @@ public class DiscoverActivity extends BaseActivity implements DiscoverView {
     }
 
     @OnClick(R.id.discover_ll_address_click)
-    public void changeAddress(){
+    public void changeAddress() {
         presenter.askForLocation();
     }
 
     @OnClick(R.id.discover_btn_search)
-    public void submitNewSearch(){
+    public void submitNewSearch() {
         presenter.fetchData(newAddress.getText().toString());
 
     }

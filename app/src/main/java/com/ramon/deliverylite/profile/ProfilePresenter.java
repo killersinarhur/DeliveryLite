@@ -1,14 +1,10 @@
 package com.ramon.deliverylite.profile;
 
 import android.app.Activity;
-import android.location.Geocoder;
 
 import com.ramon.deliverylite.base.BasePresenter;
 import com.ramon.deliverylite.base.MVPView;
 import com.ramon.deliverylite.persistence.Datastore;
-import com.ramon.deliverylite.utils.LocationUtils;
-
-import org.apache.commons.lang3.StringUtils;
 
 public class ProfilePresenter<V extends MVPView> extends BasePresenter<V> {
 
@@ -30,7 +26,7 @@ public class ProfilePresenter<V extends MVPView> extends BasePresenter<V> {
     }
 
     public void saveInstance(String name, String address, String email, String phoneNumber) {
-        persistUserProfile(name,address,email,phoneNumber);
+        persistUserProfile(name, address, email, phoneNumber);
     }
 
     public void persistUserProfile(String name, String address, String email, String phoneNumber) {

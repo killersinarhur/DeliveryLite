@@ -10,13 +10,12 @@ public class UserProfile {
     private String phone;
     private String email;
     private String addressString;
+    private String name;
 
     @Override
     public String toString() {
         return new StringBuilder().append(name).append(phone).append(email).append(addressString).toString();
     }
-
-    private String name;
 
     public Address getAddress() {
         Timber.d(address.toString());
@@ -27,35 +26,35 @@ public class UserProfile {
         this.address = address;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getPhone() {
         return phone;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setAddressString(String addressString) {
-        this.addressString = addressString;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddressString() {
         return addressString;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAddressString(String addressString) {
+        this.addressString = addressString;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

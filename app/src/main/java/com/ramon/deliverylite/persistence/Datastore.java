@@ -24,22 +24,22 @@ public class Datastore {
         return preferences.getString(USER_PROFILE, "");
     }
 
-    public UserProfile getUserProfile(){
-        if (!StringUtils.isEmpty(getUserProfileString())){
-            return gson.fromJson(getUserProfileString(),UserProfile.class);
+    public UserProfile getUserProfile() {
+        if (!StringUtils.isEmpty(getUserProfileString())) {
+            return gson.fromJson(getUserProfileString(), UserProfile.class);
         }
         return null;
     }
 
-    public void persistUserProfile(UserProfile profile){
-        preferences.edit().putString(USER_PROFILE,gson.toJson(profile)).apply();
+    public void persistUserProfile(UserProfile profile) {
+        preferences.edit().putString(USER_PROFILE, gson.toJson(profile)).apply();
     }
 
     public boolean hasDeclinedProfile() {
-        return preferences.getBoolean(DECLINED_PROFILE,false);
+        return preferences.getBoolean(DECLINED_PROFILE, false);
     }
 
-    public void persistDeclinedProfile(boolean declined){
-        preferences.edit().putBoolean(DECLINED_PROFILE,declined).apply();
+    public void persistDeclinedProfile(boolean declined) {
+        preferences.edit().putBoolean(DECLINED_PROFILE, declined).apply();
     }
 }
