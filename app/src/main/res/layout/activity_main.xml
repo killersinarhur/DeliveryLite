@@ -15,6 +15,30 @@
         android:visibility="gone" />
 
     <LinearLayout
+        android:id="@+id/discover_ll_new_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <EditText
+            android:id="@+id/discover_et_new_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="textPostalAddress" />
+
+        <Button
+            android:id="@+id/discover_btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/discover_ll_address_click"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Change"
-            android:visibility="gone" />
+            android:visibility="visible" />
     </LinearLayout>
 
 

@@ -15,8 +15,6 @@ import com.ramon.deliverylite.webservice.api.model.Restaurant;
 
 import java.util.List;
 
-import timber.log.Timber;
-
 public class DiscoverPresenter<V extends MVPView> extends BasePresenter<V> implements DiscoverCallBack {
 
     private final Activity activity;
@@ -34,22 +32,31 @@ public class DiscoverPresenter<V extends MVPView> extends BasePresenter<V> imple
     }
 
     public void onViewCreated() {
-        if (datastore.getUserProfile() == null) {
-            view.launchProfileActivity();
-        } else {
+        if (datastore.getUserProfile() != null) {
             UserProfile profile = datastore.getUserProfile();
             view.updateLocationString(profile.getAddressString());
-            if (body==null) {
-                view.showLoadingDialog();
-                Address address = LocationUtils.geocodeAddress(new Geocoder(activity), profile.getAddressString());
-                client.fetchRestList(this, address.getLatitude(), address.getLongitude(), null);
+            if (body == null) {
+                fetchData(profile.getAddressString());
             }
+        } else if (datastore.hasDeclinedProfile()) {
+            view.promptUserForLocation();
+
+        } else {
+            view.promptUserForProfile();
         }
+    }
+
+    public void fetchData(String addressString) {
+        view.showLoadingDialog();
+        Address address = LocationUtils.geocodeAddress(new Geocoder(activity), addressString);
+        view.updateLocationString(addressString);
+        client.fetchRestList(this, address.getLatitude(), address.getLongitude(), null);
+
     }
 
     @Override
     public void onListSuccess(List<Restaurant> body) {
-        this.body=body;
+        this.body = body;
         view.hideLoadingDialog();
         view.createView(body);
 
@@ -63,5 +70,14 @@ public class DiscoverPresenter<V extends MVPView> extends BasePresenter<V> imple
 
     public void itemClicked(Restaurant restaurant) {
         view.itemClicked(restaurant);
+    }
+
+    public void createAProfile() {
+        view.launchProfileActivity();
+
+    }
+
+    public void askForLocation() {
+        view.promptUserForLocation();
     }
 }
